@@ -217,3 +217,7 @@ outputs/
 *.bin
 *.safetensors
 *.ckpt
+
+# Project Specific Ignores
+GroundingDINO/
+*.pth.*
