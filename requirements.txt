@@ -1,0 +1,24 @@
+# Core DL
+torch>=2.0.0
+torchvision
+
+# Hugging Face Ecosystem
+diffusers
+transformers
+accelerate
+safetensors
+
+# Computer Vision & Image Proc
+opencv-python
+Pillow
+matplotlib
+
+# Metrics [cite: 76, 74]
+torchmetrics[image]
+lpips
+clip-score
+
+# Specific dependencies for Grounded-SAM usually require manual install, 
+# but keeping these here helps track what you need:
+# segment-anything
+# groundingdino
