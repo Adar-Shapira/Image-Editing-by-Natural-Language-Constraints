@@ -221,3 +221,6 @@ outputs/
 # Project Specific Ignores
 GroundingDINO/
 *.pth.*
+checkpoints/
+__pycache__/
+*.DS_Store
