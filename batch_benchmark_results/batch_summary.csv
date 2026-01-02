@@ -1,16 +1,16 @@
 Source,Prompt,Target,Str,Mask,CLIP,SSIM,Output File
-test_cat.jpg,A photo of a french bulldog puppy sleeping curled up,cat,0.75,✅,23.93,1.0,test_cat_cat_a_photo_1.png
-test_cat.jpg,The pink blanket background with no cat present,cat on the right,0.85,✅,25.58,1.0,test_cat_cat_on_the_right_the_pink_2.png
-test_cat.jpg,Cats sleeping on a blue fleece blanket,pink blanket,0.7,✅,29.49,1.0,test_cat_pink_blanket_cats_sleeping_3.png
-test_cat.jpg,A stone statue of a cat sleeping,cat,0.65,✅,23.71,1.0,test_cat_cat_a_stone_4.png
-test_cat.jpg,A sleeping baby fox,cat,0.75,✅,20.36,1.0,test_cat_cat_a_sleeping_5.png
-test_vacation_man.jpg,A man wearing a tailored navy suit jacket and tie,floral shirt,0.75,✅,20.5,1.0,test_vacation_man_floral_shirt_a_man_1.png
-test_vacation_man.jpg,A man wearing a knit beanie hat,straw hat,0.75,✅,20.47,1.0,test_vacation_man_straw_hat_a_man_2.png
-test_vacation_man.jpg,A man standing in a snowy ski resort mountain landscape,beach background,0.85,✅,21.35,1.0,test_vacation_man_beach_background_a_man_3.png
-test_vacation_man.jpg,A woman smiling wearing a straw hat and sunglasses,man,0.7,✅,30.55,1.0,test_vacation_man_man_a_woman_4.png
-test_vacation_man.jpg,A man smiling looking at camera without sunglasses,sunglasses,0.8,✅,25.43,1.0,test_vacation_man_sunglasses_a_man_5.png
-test_green_apple.jpg,A shiny red apple with water droplets,apple,0.6,✅,31.29,1.0,test_green_apple_apple_a_shiny_1.png
-test_green_apple.jpg,A green apple with a large bite mark taken out of the side,apple,0.8,✅,34.79,1.0,test_green_apple_apple_a_green_2.png
-test_green_apple.jpg,A green apple sitting inside a rustic ceramic bowl,apple,0.75,✅,28.4,1.0,test_green_apple_apple_a_green_3.png
-test_green_apple.jpg,A solid golden apple statue,apple,0.7,✅,27.9,1.0,test_green_apple_apple_a_solid_4.png
-test_green_apple.jpg,Sliced green apple wedges piled up,apple,0.8,✅,31.61,1.0,test_green_apple_apple_sliced_green_5.png
+test_cat.jpg,A photo of a french bulldog puppy sleeping curled up,cat,0.75,✅,24.74,1.0,test_cat_cat_a_photo_1.png
+test_cat.jpg,The pink blanket background with no cat present,cat on the right,0.85,✅,27.73,0.999,test_cat_cat_on_the_right_the_pink_2.png
+test_cat.jpg,Cats sleeping on a blue fleece blanket,pink blanket,0.7,✅,31.32,0.997,test_cat_pink_blanket_cats_sleeping_3.png
+test_cat.jpg,A stone statue of a cat sleeping,cat,0.65,✅,18.41,1.0,test_cat_cat_a_stone_4.png
+test_cat.jpg,A sleeping baby fox,cat,0.75,✅,16.8,1.0,test_cat_cat_a_sleeping_5.png
+test_vacation_man.jpg,A man wearing a tailored navy suit jacket and tie,floral shirt,0.75,✅,20.83,1.0,test_vacation_man_floral_shirt_a_man_1.png
+test_vacation_man.jpg,A man wearing a knit beanie hat,straw hat,0.75,✅,23.35,1.0,test_vacation_man_straw_hat_a_man_2.png
+test_vacation_man.jpg,A man standing in a snowy ski resort mountain landscape,beach background,0.85,✅,28.5,0.999,test_vacation_man_beach_background_a_man_3.png
+test_vacation_man.jpg,A woman smiling wearing a straw hat and sunglasses,man,0.7,✅,31.07,1.0,test_vacation_man_man_a_woman_4.png
+test_vacation_man.jpg,A man smiling looking at camera without sunglasses,sunglasses,0.8,✅,26.0,1.0,test_vacation_man_sunglasses_a_man_5.png
+test_green_apple.jpg,A shiny red apple with water droplets,apple,0.6,✅,27.56,1.0,test_green_apple_apple_a_shiny_1.png
+test_green_apple.jpg,A green apple with a large bite mark taken out of the side,apple,0.8,✅,33.43,1.0,test_green_apple_apple_a_green_2.png
+test_green_apple.jpg,A green apple sitting inside a rustic ceramic bowl,apple,0.75,✅,32.49,1.0,test_green_apple_apple_a_green_3.png
+test_green_apple.jpg,A solid golden apple statue,apple,0.7,✅,31.1,1.0,test_green_apple_apple_a_solid_4.png
+test_green_apple.jpg,Sliced green apple wedges piled up,apple,0.8,✅,28.77,1.0,test_green_apple_apple_sliced_green_5.png

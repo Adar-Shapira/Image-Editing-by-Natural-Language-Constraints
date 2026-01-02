@@ -1,63 +1,72 @@
 import torch
 import numpy as np
-from PIL import Image
-from diffusers import StableDiffusionImg2ImgPipeline
+from PIL import Image, ImageFilter
+import scipy.ndimage
+# FIX: Use generic loader to avoid class-specific import errors
+from diffusers import DiffusionPipeline
 
 class ControllableEditPipeline:
-    # FIX: Added lora_path and **kwargs to __init__ to prevent crashes when called by Evaluator
     def __init__(self, device="cuda", lora_path=None, **kwargs):
         self.device = device
-        print("🚀 Loading Robust SDEdit Pipeline...")
-        if lora_path:
-            print(f"ℹ️ Note: LoRA path '{lora_path}' is ignored in SDEdit mode.")
-        
-        # Load SDEdit Pipeline
-        self.pipe = StableDiffusionImg2ImgPipeline.from_pretrained(
-            "runwayml/stable-diffusion-v1-5",
-            torch_dtype=torch.float16,
-            safety_checker=None
+        self.segmenter = None
+        print("🚀 Loading Inpainting (via DiffusionPipeline)...")
+        # Load model using generic pipeline to bypass import issues
+        self.pipe = DiffusionPipeline.from_pretrained(
+            "runwayml/stable-diffusion-inpainting",
+            torch_dtype=torch.float16, safety_checker=None
         ).to(device)
         self.pipe.enable_model_cpu_offload()
-        
-        self.segmenter = None 
 
-    def edit(self, image, prompt, strength=0.5, detect_target=None, **kwargs):
-        # A. GENERATE MASK
+        if lora_path:
+            try:
+                self.pipe.load_lora_weights(lora_path)
+                print(f"✅ LoRA loaded: {lora_path}")
+            except Exception as e: print(f"❌ LoRA Error: {e}")
+
+    def edit(self, image, prompt, strength=0.75, detect_target=None, dilate_pixels=15, blur_radius=2, **kwargs):
         mask = None
-        if self.segmenter:
-            search_term = detect_target
-            # Auto-detect target if missing
-            if not search_term: 
-                if "cat" in prompt.lower(): search_term = "cat"
-                elif "dog" in prompt.lower(): search_term = "dog"
+        if self.segmenter and detect_target:
+            # Auto-detect fallback
+            search = detect_target
+            if not search: 
+                search = "cat" if "cat" in prompt.lower() else "dog"
             
-            if search_term:
-                print(f"🔎 Segmenting subject: '{search_term}'...")
-                try:
-                    mask = self.segmenter.detect_and_segment(image, search_term)
-                except Exception as e:
-                    print(f"⚠️ Segmentation Warning: {e}")
+            print(f"🔎 Segmenting: '{search}'")
+            try:
+                if hasattr(self.segmenter, 'detect_and_segment'): m = self.segmenter.detect_and_segment(image, search)
+                else: m = self.segmenter.predict(image, [search])
+                
+                # Normalize mask
+                if isinstance(m, tuple): m = m[0]
+                if hasattr(m, 'cpu'): m = m.cpu().numpy()
+                if isinstance(m, np.ndarray) and m.ndim > 2: m = m[0]
 
-        # B. SDEDIT
-        print(f"🎨 Running SDEdit: '{prompt}' (Strength {strength})...")
-        generator = torch.Generator(self.device).manual_seed(42)
+                if m is not None:
+                    # Dilate
+                    if dilate_pixels > 0:
+                        s = scipy.ndimage.generate_binary_structure(2, 2)
+                        m = scipy.ndimage.binary_dilation(m, structure=s, iterations=dilate_pixels).astype(np.float32)
+                    else: m = m.astype(np.float32)
+                    
+                    # Feather
+                    mask = Image.fromarray((m * 255).astype(np.uint8))
+                    if blur_radius > 0: mask = mask.filter(ImageFilter.GaussianBlur(blur_radius))
+            except Exception as e: print(f"⚠️ Seg Error: {e}")
+
+        if mask is None:
+            print("⚠️ No mask found. Returning original.")
+            return image, None
+
+        print(f"🎨 Inpainting: '{prompt}'")
+        gen = torch.Generator(self.device).manual_seed(42)
         
-        edited_image = self.pipe(
-            prompt=prompt,
-            image=image,
-            strength=strength,
-            guidance_scale=7.5,
-            num_inference_steps=50,
-            generator=generator
+        out = self.pipe(
+            prompt=prompt, 
+            image=image.resize((512,512)), 
+            mask_image=mask.resize((512,512)), 
+            strength=strength, 
+            guidance_scale=7.5, 
+            num_inference_steps=50, 
+            generator=gen
         ).images[0]
-
-        # C. COMPOSITE
-        final_image = edited_image
-        if mask is not None:
-            print("✂️ Compositing (Restoring Background)...")
-            if isinstance(mask, np.ndarray):
-                mask = Image.fromarray((mask * 255).astype(np.uint8))
-            mask = mask.resize(image.size).convert("L")
-            final_image = Image.composite(edited_image, image, mask)
-
-        return final_image, mask
+        return out, mask
