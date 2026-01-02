@@ -6,7 +6,7 @@ from segment_anything import sam_model_registry, SamPredictor
 import os
 import gc
 
-class GroundedSAM:
+class Segmenter:
     def __init__(self, device="cuda", sam_checkpoint="sam_vit_b_01ec64.pth"):
         print("Loading Grounded-SAM (Lite Version)...")
         self.device = device

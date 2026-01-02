@@ -16,10 +16,11 @@ from src.pipeline import ControllableEditPipeline
 
 class Evaluator:
     def __init__(self, device="cuda"):
-        print("📊 Initializing Evaluator & Metrics...")
+        print(f"📊 Initializing Evaluator & Metrics on {device.upper()}...")
         self.device = device
         
         # 1. Load Metrics
+        # Note: Metrics are loaded to the specific device to avoid mismatch errors
         self.lpips = LearnedPerceptualImagePatchSimilarity(net_type='vgg').to(device)
         self.ssim = StructuralSimilarityIndexMeasure(data_range=1.0).to(device)
         self.clip = CLIPScore(model_name_or_path="openai/clip-vit-base-patch16").to(device)
@@ -85,12 +86,25 @@ class Evaluator:
         return edited_image, results
 
 if __name__ == "__main__":
-    evaluator = Evaluator()
+    # --- SMART DEVICE DETECTION ---
+    # This block prevents the script from crashing if GPU is not available
+    device_name = "cuda" if torch.cuda.is_available() else "cpu"
+    print(f"🚀 Launching Benchmark Script on: {device_name.upper()}")
+
+    evaluator = Evaluator(device=device_name)
+    
+    # Run Test
     url = "http://images.cocodataset.org/val2017/000000039769.jpg"
     img_path = "test_cat.jpg"
     if not os.path.exists(img_path):
-        Image.open(requests.get(url, stream=True).raw).save(img_path)
+        try:
+            Image.open(requests.get(url, stream=True).raw).save(img_path)
+        except:
+            print("⚠️ Could not download test image. Please ensure 'test_cat.jpg' exists.")
     
-    img, metrics = evaluator.run_single_test(img_path, "Change the cat into a dog")
-    print("\n🏆 Final Metrics (LoRA + Inversion):")
-    print(metrics)
+    if os.path.exists(img_path):
+        img, metrics = evaluator.run_single_test(img_path, "Change the cat into a dog")
+        print("\n🏆 Final Metrics (LoRA + Inversion):")
+        print(metrics)
+    else:
+        print("❌ Error: Test image not found.")
