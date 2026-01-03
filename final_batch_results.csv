@@ -1,0 +1,10 @@
+Original,Prompt,CLIP,SSIM,LPIPS
+test_cat.jpg,A photo of a french bulldog puppy sleeping,0.245,0.84,0.177
+test_cat.jpg,"A clean pink fleece blanket, no object",0.27,0.836,0.23
+test_cat.jpg,A robotic chrome cat,0.247,0.838,0.159
+test_green_apple.jpg,A red apple with a large bitten chunk,0.295,0.977,0.204
+test_green_apple.jpg,A shiny golden apple,0.297,0.976,0.155
+test_green_apple.jpg,A blue crystal apple,0.28,0.976,0.133
+test_vacation_man.jpg,A man standing on a snowy mountain,0.274,0.757,0.367
+test_vacation_man.jpg,A man wearing a black tuxedo,0.242,0.984,0.175
+test_vacation_man.jpg,A man on the surface of Mars,0.243,0.739,0.419
