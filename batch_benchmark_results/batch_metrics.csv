@@ -1,0 +1,9 @@
+Image,Prompt,CLIP (↑),SSIM (↑),LPIPS (↓),File
+test_cat.jpg,A photo of a french bulldog puppy sleeping curled up,19.5,0.739,0.114,test_cat_cat_a_photo.png
+test_cat.jpg,A clean pink fleece blanket background with no objects,25.58,0.732,0.119,test_cat_cat_a_clean.png
+test_green_apple.jpg,A shiny red apple with water droplets,31.02,0.951,0.053,test_green_apple_apple_a_shiny.png
+test_green_apple.jpg,"A close-up photograph of bitten fruit flesh, white and oxidized, with teeth marks and debris",19.21,0.973,0.034,test_green_apple_apple_a_close-up.png
+test_green_apple.jpg,A pile of sliced green apple wedges,31.35,0.974,0.031,test_green_apple_apple_a_pile.png
+test_vacation_man.jpg,A man wearing a floral Hawaiian shirt,30.48,0.963,0.046,test_vacation_man_navy_suit_a_man.png
+test_vacation_man.jpg,A man wearing a straw fedora hat,24.68,0.899,0.061,test_vacation_man_hat_a_man.png
+test_vacation_man.jpg,A man standing on a sunny tropical beach with palm trees,34.16,0.887,0.067,test_vacation_man_snowy_mountain_background_a_man.png
