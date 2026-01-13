@@ -1,0 +1,21 @@
+Source,Instruction,Target Type,CLIP,SSIM,LPIPS,Mask_Strategy,CNet_Scale
+MagicBrush_0,Have there be a basket of fruit on the counter,fruit,0.202,0.968,0.051,standard,0.05599999999999998
+MagicBrush_1,Add a doctor.,doctor,0.209,0.911,0.092,standard,0.0
+MagicBrush_2,What if there was a drawing of a bird on his shirt?,bird,0.205,0.965,0.035,standard,0.015999999999999993
+MagicBrush_3,fill the table with cakes,table,0.236,0.791,0.37,standard,0.0
+MagicBrush_4,switch to a robot wearing armor,robot,0.281,0.97,0.032,standard,0.09999999999999908
+MagicBrush_5,Give it a hat.,hat,0.238,0.765,0.517,standard,0.0
+MagicBrush_6,Add flowers,flowers,0.174,0.963,0.027,standard,0.0459999999999999
+MagicBrush_7,let the cat wear a bow tie instead of a tie,tie,0.269,0.842,0.081,standard,0.07799999999999936
+MagicBrush_8,Put a pond next to the elephant,pond,0.268,0.79,0.198,standard,0.0
+MagicBrush_9,get rid of the baseball bat,bat,0.234,0.853,0.198,standard,0.0
+MagicBrush_10,remove the clouds,clouds,0.224,0.594,0.314,standard,0.0
+MagicBrush_11,add a dog barking near shore,barking,0.231,0.943,0.055,standard,0.011999999999999997
+MagicBrush_12,put a robot tiger next to the bear,robot,0.245,0.831,0.178,standard,0.08199999999999959
+MagicBrush_13,remove the person behind the woman,person,0.22,0.981,0.027,standard,0.022000000000000006
+MagicBrush_14,He should be eating a watermelon,watermelon,0.243,0.785,0.283,standard,0.09799999999999898
+MagicBrush_15,let the kid sleep,sleep,0.214,0.914,0.1,standard,0.0
+MagicBrush_16,Make the man's top blue.,top blue,0.19,0.909,0.095,standard,0.09999999999999896
+MagicBrush_17,remove the shoes,shoes,0.231,0.877,0.132,standard,0.0
+MagicBrush_18,put an Easter basket on the desk,basket,0.257,0.978,0.03,standard,0.09799999999999902
+MagicBrush_19,Put a pile of shoes next to the bed.,pile,0.257,0.882,0.211,standard,0.0
